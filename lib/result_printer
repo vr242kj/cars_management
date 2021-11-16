@@ -1,0 +1,9 @@
+require 'pry'
+
+class ResultPrinter
+  def print_result(search_by_rules)
+    #binding.pry
+    puts 'Results:'
+
+  end
+end
