@@ -1,0 +1,30 @@
+class Rules
+  SEARCH_RULES = %w[make model year_from year_to price_from price_to]
+
+  def initialize
+    @current_question = 0
+    @user_answers = {}
+  end
+
+  def ask_rules
+    SEARCH_RULES.each do |rule|
+      puts "Please choose #{rule}:"
+
+      user_input = gets.chomp
+
+      if rule.include?('year') || rule.include?('price')
+        user_input = user_input.to_i
+      end
+
+      @user_answers[rule] = user_input
+
+      @current_question += 1
+    end
+  end
+
+  #логіка сортіровки (each_pair)
+
+  def finished?
+    @current_question >= SEARCH_RULES.size
+  end
+end
