@@ -51,10 +51,10 @@ class Rules
           end
       end
     end
-    
-    puts search_results
+
+    return search_results
   end
-  
+
   def finished?
     @current_question >= SEARCH_RULES.size
   end
