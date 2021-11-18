@@ -17,4 +17,4 @@ unless search_by_rules.finished?
   search_by_rules.ask_rules
 end
 
-printer.print_result(search_by_rules)
+printer.print_result(search_by_rules.find_equal(cars))
