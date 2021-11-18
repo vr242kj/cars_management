@@ -22,8 +22,39 @@ class Rules
     end
   end
 
-  #логіка сортіровки (each_pair)
-
+  def find_equal(cars)
+    search_results = []
+    cars.each do |car|
+      correct = 0
+      car.each_pair do |k, v|
+        if k == 'make' && @user_answers[k].downcase == v.downcase
+          correct += 1
+        end
+        if k == 'model' && @user_answers[k].downcase == v.downcase
+          correct += 1
+        end
+        if k == 'year' && @user_answers[k + '_from'] <= v.to_i
+          correct += 1
+        end
+        if k == 'price' && @user_answers[k + '_from'] <= v.to_i
+          correct += 1
+        end
+        if k == 'year' && @user_answers[k + '_to'] >= v.to_i
+          correct += 1
+        end
+        if k == 'price' && @user_answers[k + '_to'] >= v.to_i
+          correct += 1
+        end
+        if correct == 6
+          search_results << car
+          break
+          end
+      end
+    end
+    
+    puts search_results
+  end
+  
   def finished?
     @current_question >= SEARCH_RULES.size
   end
