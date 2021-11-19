@@ -1,9 +1,15 @@
-require 'pry'
-
 class ResultPrinter
   def print_result(results)
-    #binding.pry
-    puts results
+    puts '-' * 20
+    puts 'Results:'
+    puts
 
+    results.each do |car|
+      car.each do |k, v|
+        puts "#{k.capitalize}: #{v}"
+      end
+
+      puts '-' * 20
+    end
   end
 end

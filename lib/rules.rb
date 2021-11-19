@@ -1,7 +1,12 @@
-class Rules
-  SEARCH_RULES = %w[make model year_from year_to price_from price_to]
+require 'date'
 
-  def initialize
+class Rules
+  SEARCH_RULES = %w[make model year_from year_to price_from price_to].freeze
+
+  attr_reader :cars, :current_question, :user_answers
+
+  def initialize(cars)
+    @cars = cars
     @current_question = 0
     @user_answers = {}
   end
@@ -10,49 +15,53 @@ class Rules
     SEARCH_RULES.each do |rule|
       puts "Please choose #{rule}:"
 
-      user_input = gets.chomp
+      user_input = gets.chomp.downcase
 
-      if rule.include?('year') || rule.include?('price')
-        user_input = user_input.to_i
-      end
+      user_input = user_input.to_i if rule.match?(/year|price/)
 
-      @user_answers[rule] = user_input
+      user_answers[rule] = user_input
 
       @current_question += 1
     end
   end
 
-  def find_equal(cars)
-    search_results = []
+  def match_cars
+    results = []
+
     cars.each do |car|
-      correct = 0
-      car.each_pair do |k, v|
-        if k == 'make' && @user_answers[k].downcase == v.downcase
-          correct += 1
-        end
-        if k == 'model' && @user_answers[k].downcase == v.downcase
-          correct += 1
-        end
-        if k == 'year' && @user_answers[k + '_from'] <= v.to_i
-          correct += 1
-        end
-        if k == 'price' && @user_answers[k + '_from'] <= v.to_i
-          correct += 1
-        end
-        if k == 'year' && @user_answers[k + '_to'] >= v.to_i
-          correct += 1
-        end
-        if k == 'price' && @user_answers[k + '_to'] >= v.to_i
-          correct += 1
-        end
-        if correct == 6
-          search_results << car
-          break
-          end
+      if (car['make'].downcase == user_answers['make'] || user_answers['make'].empty?) &&
+         (car['model'].downcase == user_answers['model'] || user_answers['model'].empty?) &&
+         (car['year'].between?(user_answers['year_from'], user_answers['year_to']) || user_answers['year_from'].zero? || user_answers['year_to'].zero?) &&
+         (car['price'].between?(user_answers['price_from'], user_answers['price_to']) || user_answers['price_from'].zero? || user_answers['price_to'].zero?)
+        results << car
       end
     end
 
-    return search_results
+    results
+  end
+
+  def sort_option(match_cars)
+    puts 'Please choose sort option (date_added|price):'
+    puts 'Press d if date_added or press p if price'
+
+    user_input = gets.chomp.downcase
+
+    if user_input == 'p'
+      match_cars.sort_by { |car| car['price'] }
+    else
+      match_cars.sort_by { |car| Date.strptime(car['date_added'], '%d/%m/%y') }
+    end
+  end
+
+  def sort_direction(sort_option)
+    puts 'Please choose sort direction(desc|asc):'
+    puts 'Press d if desc or press a if asc'
+
+    user_input = gets.chomp.downcase
+
+    sort_option.reverse! if user_input == 'a'
+
+    sort_option
   end
 
   def finished?
