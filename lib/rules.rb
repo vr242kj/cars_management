@@ -43,9 +43,6 @@ class Rules
   end
 
   def sort_option(match_cars)
-    puts 'Please choose sort option (date_added|price):'
-    puts 'Press d if date_added or press p if price'
-
     user_input = gets.chomp.downcase
 
     if user_input == 'p'
@@ -56,9 +53,6 @@ class Rules
   end
 
   def sort_direction(sort_option)
-    puts 'Please choose sort direction(desc|asc):'
-    puts 'Press d if desc or press a if asc'
-
     user_input = gets.chomp.downcase
 
     if user_input == 'a'

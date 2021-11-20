@@ -17,7 +17,13 @@ search_by_rules.ask_rules unless search_by_rules.finished?
 
 match_cars = search_by_rules.match_cars
 
+puts 'Please choose sort option (date_added|price):'
+puts 'Press d if date_added or press p if price'
+
 sort_option = search_by_rules.sort_option(match_cars)
+
+puts 'Please choose sort direction(desc|asc):'
+puts 'Press d if desc or press a if asc'
 
 sort_direction = search_by_rules.sort_direction(sort_option)
 
