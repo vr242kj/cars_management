@@ -58,7 +58,7 @@ class Rules
     if user_input == 'a'
       sort_option
     else
-      sort_option.reverse!
+      sort_option.reverse
     end
   end
 
