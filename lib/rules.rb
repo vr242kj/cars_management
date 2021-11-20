@@ -12,8 +12,6 @@ class Rules
   end
 
   def ask_rules
-    puts 'Please select search rules.'
-
     SEARCH_RULES.each do |rule|
       puts "Please choose #{rule}:"
 
@@ -58,16 +56,16 @@ class Rules
   end
 
   def sort_direction(sort_option)
-    sort_option.reverse!
-
     puts 'Please choose sort direction(desc|asc):'
     puts 'Press d if desc or press a if asc'
 
     user_input = gets.chomp.downcase
 
-    sort_option.reverse! if user_input == 'a'
-
-    sort_option
+    if user_input == 'a'
+      sort_option
+    else
+      sort_option.reverse!
+    end
   end
 
   def finished?

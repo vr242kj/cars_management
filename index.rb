@@ -11,6 +11,8 @@ cars = db_reader.read_file(file_name)
 search_by_rules = Rules.new(cars)
 printer = ResultPrinter.new
 
+puts 'Please select search rules.'
+
 search_by_rules.ask_rules unless search_by_rules.finished?
 
 match_cars = search_by_rules.match_cars
