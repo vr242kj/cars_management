@@ -12,6 +12,8 @@ class Rules
   end
 
   def ask_rules
+    puts 'Please select search rules.'
+
     SEARCH_RULES.each do |rule|
       puts "Please choose #{rule}:"
 
@@ -29,12 +31,14 @@ class Rules
     results = []
 
     cars.each do |car|
-      if (car['make'].downcase == user_answers['make'] || user_answers['make'].empty?) &&
-         (car['model'].downcase == user_answers['model'] || user_answers['model'].empty?) &&
-         (car['year'].between?(user_answers['year_from'], user_answers['year_to']) || user_answers['year_from'].zero? || user_answers['year_to'].zero?) &&
-         (car['price'].between?(user_answers['price_from'], user_answers['price_to']) || user_answers['price_from'].zero? || user_answers['price_to'].zero?)
-        results << car
-      end
+      next unless (car['make'].downcase == user_answers['make'] || user_answers['make'].empty?) &&
+                  (car['model'].downcase == user_answers['model'] || user_answers['model'].empty?) &&
+                  (car['year'].between?(user_answers['year_from'],
+                                        user_answers['year_to']) || user_answers['year_from'].zero? || user_answers['year_to'].zero?) &&
+                  (car['price'].between?(user_answers['price_from'],
+                                         user_answers['price_to']) || user_answers['price_from'].zero? || user_answers['price_to'].zero?)
+
+      results << car
     end
 
     results
@@ -54,6 +58,8 @@ class Rules
   end
 
   def sort_direction(sort_option)
+    sort_option.reverse!
+
     puts 'Please choose sort direction(desc|asc):'
     puts 'Press d if desc or press a if asc'
 
