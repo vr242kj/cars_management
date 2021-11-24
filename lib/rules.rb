@@ -1,10 +1,10 @@
-# frozen_string_literal: true
 require 'date'
 
 class Rules
   SEARCH_RULES = %w[make model year_from year_to price_from price_to].freeze
 
   attr_reader :cars, :current_question, :user_answers, :quantity
+  attr_reader :cars, :current_question, :user_answers
 
   def initialize(cars)
     @cars = cars
@@ -72,6 +72,11 @@ class Rules
     end
 
     @quantity
+  end
+
+
+      sort_option.reverse
+    end
   end
 
   def finished?
