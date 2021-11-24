@@ -17,8 +17,13 @@ puts 'Please select search rules.'
 
 search_by_rules.ask_rules unless search_by_rules.finished?
 
+file_write_name = "#{File.dirname(__FILE__)}/db/searches.yml"
 
-db_writer.write_file(search_by_rules.user_answers)
+searches = db_reader.read_file(file_write_name)
+
+searches.push(search_by_rules.user_answers)
+
+db_writer.write_file(searches)
 
 match_cars = search_by_rules.match_cars
 
@@ -32,10 +37,12 @@ puts 'Press d if desc or press a if asc'
 
 sort_direction = search_by_rules.sort_direction(sort_option)
 
-file_name = "#{File.dirname(__FILE__)}/db/searches.yml"
+file_write_name = "#{File.dirname(__FILE__)}/db/searches.yml"
 
-searches = db_reader.read_file(file_name)
+searches = db_reader.read_file(file_write_name)
 
 req_quantity = search_by_rules.requests_quantity(searches)
 
-printer.print_result(sort_direction, req_quantity)
+printer.print_statics(sort_direction.length, req_quantity)
+
+printer.print_result(sort_direction)

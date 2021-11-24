@@ -1,12 +1,6 @@
 class ResultPrinter
-  def print_result(results, req_quantity)
+  def print_result(results)
     puts '-' * 20
-    puts 'Statistic:'
-
-    puts "Total Quantity: #{results.length}"
-    puts "Requests quantity: #{req_quantity}"
-    puts '-' * 20
-
     puts 'Results:'
 
     results.each do |car|
@@ -16,5 +10,13 @@ class ResultPrinter
 
       puts '-' * 20
     end
+  end
+
+  def print_statics (total_quantity, req_quantity)
+
+    puts '-' * 20
+    puts 'Statistic:'
+    puts "Total Quantity: #{total_quantity}"
+    puts "Requests quantity: #{req_quantity}"
   end
 end

@@ -1,12 +1,10 @@
 require 'yaml'
 
 class DbWriter
-  def write_file(new_data)
-    file_name = "#{File.dirname(__FILE__)}/cars_manager/db/searches.yml"
+  def write_file(searches)
 
-    #nil unless File.exist?(file_name)
-
-    File.write('file_name', new_data.to_yaml)
+    File.open('C:\Users\Vetal\RubymineProjects\cars_manager\db\searches.yml', 'w') do |file|
+      file.write(searches.to_yaml)
+    end
   end
 end
-
