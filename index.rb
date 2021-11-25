@@ -2,9 +2,12 @@ require_relative 'lib/read_db'
 require_relative 'lib/write_db'
 require_relative 'lib/rules'
 require_relative 'lib/result_printer'
+require_relative 'lib/statistic'
 
 db_reader = DbReader.new
 db_writer = DbWriter.new
+
+File.new('db/cars.yml', 'a+')
 
 file_name = "#{File.dirname(__FILE__)}/db/cars.yml"
 
@@ -17,13 +20,13 @@ puts 'Please select search rules.'
 
 search_by_rules.ask_rules unless search_by_rules.finished?
 
+File.new('db/searches.yml', 'a+')
+
 file_write_name = "#{File.dirname(__FILE__)}/db/searches.yml"
 
 searches = db_reader.read_file(file_write_name)
 
-searches.push(search_by_rules.user_answers)
-
-db_writer.write_file(searches)
+searches ||= []
 
 match_cars = search_by_rules.match_cars
 
@@ -37,12 +40,17 @@ puts 'Press d if desc or press a if asc'
 
 sort_direction = search_by_rules.sort_direction(sort_option)
 
-file_write_name = "#{File.dirname(__FILE__)}/db/searches.yml"
+statistic = Statistic.new
 
-searches = db_reader.read_file(file_write_name)
+req_quantity = statistic.requests_quantity(searches, search_by_rules.user_answers)
+total_quantity = statistic.total_quantity(sort_direction)
 
-req_quantity = search_by_rules.requests_quantity(searches)
+searches.push(search_by_rules.user_answers)
+searches.push('total_quantity' => total_quantity)
+searches.push('requests_quantity' => req_quantity)
 
-printer.print_statics(sort_direction.length, req_quantity)
+db_writer.write_file(searches)
+
+printer.print_statics(total_quantity, req_quantity)
 
 printer.print_result(sort_direction)

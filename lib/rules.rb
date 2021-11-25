@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 require 'date'
 
 class Rules
@@ -29,6 +28,8 @@ class Rules
 
   def match_cars
     results = []
+
+    return results unless cars
 
     cars.each do |car|
       next unless (car['make'].downcase == user_answers['make'] || user_answers['make'].empty?) &&
@@ -62,16 +63,6 @@ class Rules
     else
       sort_option.reverse!
     end
-  end
-
-  def requests_quantity(searches)
-    return @quantity unless searches
-
-    searches.each do |hash|
-      @quantity += 1 if hash == user_answers
-    end
-
-    @quantity
   end
 
   def finished?
