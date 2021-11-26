@@ -29,17 +29,8 @@ class Rules
   def match_cars
     results = []
 
-    return results unless cars
-
     cars.each do |car|
-      next unless (car['make'].downcase == user_answers['make'] || user_answers['make'].empty?) &&
-                  (car['model'].downcase == user_answers['model'] || user_answers['model'].empty?) &&
-                  (car['year'].between?(user_answers['year_from'],
-                                        user_answers['year_to']) || user_answers['year_from'].zero? || user_answers['year_to'].zero?) &&
-                  (car['price'].between?(user_answers['price_from'],
-                                         user_answers['price_to']) || user_answers['price_from'].zero? || user_answers['price_to'].zero?)
-
-      results << car
+      results << car if match_make(car) && match_model(car) && match_year(car) && match_price(car)
     end
 
     results
@@ -67,5 +58,25 @@ class Rules
 
   def finished?
     @current_question >= SEARCH_RULES.size
+  end
+
+  private
+
+  def match_make(car)
+    car['make'].downcase == user_answers['make'] || user_answers['make'].empty?
+  end
+
+  def match_model(car)
+    car['model'].downcase == user_answers['model'] || user_answers['model'].empty?
+  end
+
+  def match_year(car)
+    car['year'].between?(user_answers['year_from'], user_answers['year_to']) ||
+      user_answers['year_from'].zero? || user_answers['year_to'].zero?
+  end
+
+  def match_price(car)
+    car['price'].between?(user_answers['price_from'], user_answers['price_to']) ||
+      user_answers['price_from'].zero? || user_answers['price_to'].zero?
   end
 end

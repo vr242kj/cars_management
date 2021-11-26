@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResultPrinter
   def print_result(results)
     puts '-' * 20
@@ -12,11 +14,10 @@ class ResultPrinter
     end
   end
 
-  def print_statics (total_quantity, req_quantity)
-
+  def print_statics (print_total_statistics)
     puts '-' * 20
     puts 'Statistic:'
-    puts "Total Quantity: #{total_quantity}"
-    puts "Requests quantity: #{req_quantity}"
+    puts "Total Quantity: #{print_total_statistics[:total_quantity]}"
+    puts "Requests quantity: #{print_total_statistics[:requests_quantity]}"
   end
 end
