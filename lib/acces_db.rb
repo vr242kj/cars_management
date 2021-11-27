@@ -1,6 +1,6 @@
 require 'yaml'
 
-class DbReader
+class DbAccer
   def read_file(file_name)
 
     YAML.load_file(file_name)
