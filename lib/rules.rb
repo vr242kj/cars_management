@@ -1,4 +1,4 @@
-require 'date'
+# frozen_string_literal: true
 
 class Rules
   SEARCH_RULES = %w[make model year_from year_to price_from price_to].freeze
@@ -9,7 +9,6 @@ class Rules
     @cars = cars
     @current_question = 0
     @user_answers = {}
-    @quantity = 0
   end
 
   def ask_rules
