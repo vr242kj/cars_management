@@ -15,7 +15,7 @@ class Statistics
     requests  = {}
 
     user_answers.each do |k, v|
-      requests[k] = v if v != "" && v != 0
+      requests[k] = v if v != '' && v != 0
     end
 
     requests
