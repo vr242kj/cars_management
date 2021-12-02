@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class ResultPrinter
   def print_result(results)
     puts '-' * 20

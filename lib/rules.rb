@@ -3,13 +3,12 @@ require 'date'
 class Rules
   SEARCH_RULES = %w[make model year_from year_to price_from price_to].freeze
 
-  attr_reader :cars, :current_question, :user_answers, :quantity
+  attr_reader :cars, :current_question, :user_answers
 
   def initialize(cars)
     @cars = cars
     @current_question = 0
     @user_answers = {}
-    @quantity = 0
   end
 
   def ask_rules
@@ -63,20 +62,18 @@ class Rules
   private
 
   def match_make(car)
-    car['make'].downcase == user_answers['make'] || user_answers['make'].empty?
+    user_answers['make'].empty? || car['make'].downcase == user_answers['make']
   end
 
   def match_model(car)
-    car['model'].downcase == user_answers['model'] || user_answers['model'].empty?
+     user_answers['model'].empty? || car['model'].downcase == user_answers['model']
   end
 
   def match_year(car)
-    car['year'].between?(user_answers['year_from'], user_answers['year_to']) ||
-      user_answers['year_from'].zero? || user_answers['year_to'].zero?
+    user_answers['year_to'].zero? || car['year'].between?(user_answers['year_from'], user_answers['year_to'])
   end
 
   def match_price(car)
-    car['price'].between?(user_answers['price_from'], user_answers['price_to']) ||
-      user_answers['price_from'].zero? || user_answers['price_to'].zero?
+    user_answers['price_to'].zero? || car['price'].between?(user_answers['price_from'], user_answers['price_to'])
   end
 end
