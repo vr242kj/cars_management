@@ -32,11 +32,7 @@ Database: **cars.yml**(https://gist.github.com/Svatok/bd80ffb7d34969262e5a65579e
 > ruby -v
 2. Clone respected git repository.
 > git clone https://github.com/vr242kj/cars_management.git
-3. Create a folder *db* 
-> mkdir db
-4. Download the cars.yml and move it to a folder *db*
-> mv cars.yml /RubymineProjects/cars_manager/db
-5. Run index.rb file.
+3. Run index.rb file.
 > ruby index.rb
 
 ## Results
