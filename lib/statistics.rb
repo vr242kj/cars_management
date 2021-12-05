@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class Statistics
 
+class Statistics
   def initialize
     @statistic = { total_quantity: 0, requests_quantity: 1 }
     @search_statistics = []
