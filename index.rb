@@ -4,14 +4,14 @@ require_relative 'lib/rules'
 require_relative 'lib/result_printer'
 require_relative 'lib/statistics'
 
-db_access = Database.new
-
 file_name = "/db/cars.yml"
 file_searches = "/db/searches.yml"
 
-cars = db_access.read(file_name)
+cars = Database.new(file_name)
+cars = cars.read
 
-read_searches = db_access.read(file_searches)
+searches = Database.new(file_searches)
+searches = searches.read
 
 search_by_rules = Rules.new(cars)
 printer = ResultPrinter.new
@@ -24,9 +24,9 @@ search_by_rules.ask_rules unless search_by_rules.finished?
 match_cars = search_by_rules.match_cars
 
 statistics.make_total_quantity(match_cars)
-requests_quantity = statistics.make_requests_quantity(search_by_rules.user_answers)
-total_statistic = statistics.total_statistic(requests_quantity, read_searches)
-db_access.write(total_statistic, file_searches)
+requests_quantity = statistics.valuable_request_values(search_by_rules.user_answers)
+total_statistic = statistics.total_statistic(requests_quantity, searches)
+searches.write(total_statistic)
 
 puts 'Please choose sort option (date_added|price):'
 puts 'Press d if date_added or press p if price'

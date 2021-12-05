@@ -10,7 +10,7 @@ class Statistics
     @statistic[:total_quantity] = match_cars.size
   end
 
-  def make_requests_quantity(user_answers)
+  def valuable_request_values(user_answers)
     requests  = {}
 
     user_answers.each do |k, v|
