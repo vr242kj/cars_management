@@ -6,8 +6,8 @@ require_relative 'lib/statistics'
 
 database = Database.new
 
-file_name = "/db/cars.yml"
-file_searches = "/db/searches.yml"
+file_name = "/db/cars"
+file_searches = "/db/searches"
 
 cars = database.read(file_name)
 
@@ -26,7 +26,7 @@ match_cars = search_by_rules.match_cars
 statistics.make_total_quantity(match_cars)
 requests_quantity = statistics.valuable_request_values(search_by_rules.user_answers)
 total_statistic = statistics.total_statistic(requests_quantity, read_searches)
-database.write(total_statistic, file_searches)
+database.write(file_searches, total_statistic)
 
 puts 'Please choose sort option (date_added|price):'
 puts 'Press d if date_added or press p if price'
