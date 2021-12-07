@@ -15,7 +15,6 @@ read_searches = database.read(file_searches, true)
 
 search_by_rules = Rules.new(cars)
 printer = ResultPrinter.new
-statistics = Statistics.new
 
 puts 'Please select search rules.'
 
@@ -23,20 +22,21 @@ search_by_rules.ask_rules unless search_by_rules.finished?
 
 match_cars = search_by_rules.match_cars
 
-statistics.make_total_quantity(match_cars)
-requests_quantity = statistics.valuable_request_values(search_by_rules.user_answers)
-total_statistic = statistics.total_statistic(requests_quantity, read_searches)
+statistics = Statistics.new(match_cars)
+
+requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
+total_statistic = statistics.total_statistic(requests_values, read_searches)
 database.write(file_searches, total_statistic)
 
 puts 'Please choose sort option (date_added|price):'
 puts 'Press d if date_added or press p if price'
 sort_option = search_by_rules.sort_option(match_cars)
 
-puts 'Please choose sort direction(desc|asc):'
+puts 'Please choose sort direction (desc|asc):'
 puts 'Press d if desc or press a if asc'
 sort_direction = search_by_rules.sort_direction(sort_option)
 
-print_total_statistics = statistics.print_total_statistics(requests_quantity)
+print_total_statistics = statistics.find_statistic(requests_values)
 
 printer.print_statics(print_total_statistics)
 
