@@ -11,10 +11,9 @@ class Statistics
   end
 
   def valuable_request_values(user_answers)
-    requests  = {}
-
-    user_answers.each do |k, v|
-      requests[k] = v if v != '' && v != 0
+    requests = user_answers.inject({}) do |memo, (key, value)|
+      memo[key] = value if value != '' && value != 0
+      memo
     end
 
     requests
