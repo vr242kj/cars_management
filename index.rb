@@ -6,12 +6,12 @@ require_relative 'lib/statistics'
 
 database = Database.new
 
-file_name = "/db/cars"
-file_searches = "/db/searches"
+file_cars = 'cars'
+file_searches = 'searches'
 
-cars = database.read(file_name)
+cars = database.read(file_cars)
 
-read_searches = database.read(file_searches)
+read_searches = database.read(file_searches, true)
 
 search_by_rules = Rules.new(cars)
 printer = ResultPrinter.new
