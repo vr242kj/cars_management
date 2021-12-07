@@ -4,7 +4,7 @@ class Database
   PATH = File.expand_path('../../db', __FILE__)
 
   def read(file_name, exist = false)
-    check_file_existing(file_name, exist)
+    create_if_not_exists(file_name, exist)
 
     return unless File.exist?("#{PATH}/#{file_name}.yml")
 
@@ -15,7 +15,7 @@ class Database
     File.open("#{PATH}/#{file_name}.yml", 'w') { |f| f.write(data.to_yaml) }
   end
 
-  def check_file_existing(file_name, exist)
+  def create_if_not_exists(file_name, exist)
     if exist && !File.exist?("#{PATH}/#{file_name}.yml")
 
        File.new("#{PATH}/#{file_name}.yml", 'w')
