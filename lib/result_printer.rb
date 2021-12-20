@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'terminal-table'
 
 class ResultPrinter
   def print_result(results)

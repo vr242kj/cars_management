@@ -15,7 +15,7 @@ PLATFORMS
 DEPENDENCIES
   colorize (~> 0.8.1)
   i18n (~> 1.8)
-  terminal-table (~> 3.0)
+  terminal-table
 
 BUNDLED WITH
    2.2.33
