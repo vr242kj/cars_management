@@ -3,23 +3,22 @@ require 'terminal-table'
 
 class ResultPrinter
   def print_result(results)
-    puts '-' * 20
-    puts 'Results:'
+    rows = []
 
     results.each do |car|
       car.each do |k, v|
-        puts "#{k.capitalize}: #{v}"
+        rows << [I18n.t("car_fields.#{k}").capitalize, v]
       end
-
-      puts '-' * 20
+      rows << :separator
     end
-  end
+    puts Terminal::Table.new(title: I18n.t(:result), rows: rows)
+end
 
   def print_statics (print_total_statistics)
     table = Terminal::Table.new do |t|
-      t.title = 'Statistic'
-      t << ['Total Quantity', print_total_statistics[:total_quantity]]
-      t << ['Requests quantity', print_total_statistics[:requests_quantity]]
+      t.title = I18n.t(:statistic)
+      t << [I18n.t('statistic_fields.total_quantity'), print_total_statistics[:total_quantity]]
+      t << [I18n.t('statistic_fields.requests_quantity'), print_total_statistics[:requests_quantity]]
     end
 
     puts table

@@ -13,7 +13,7 @@ class Rules
 
   def ask_rules
     SEARCH_RULES.each do |rule|
-      puts "Please choose #{rule}:"
+      puts I18n.t("search_fields.#{rule}")
 
       user_input = gets.chomp.downcase
 

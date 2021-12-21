@@ -1,0 +1,28 @@
+en:
+  car_fields:
+    id: 'Id'
+    make: 'Make'
+    model: 'Model'
+    year: 'Year'
+    odometer: 'Odometer'
+    price: 'Price'
+    description: 'Description'
+    date_added: 'Date added'
+  search_fields:
+    make: 'Please choose make:'
+    model: 'Please choose model:'
+    year_from: 'Please choose year from:'
+    year_to: 'Please choose year to:'
+    price_from: 'Please choose price from:'
+    price_to: 'Please choose price to:'
+  sort_fields:
+    option: 'Please choose sort option (date_added|price):'
+    option_letter: 'Press d if date_added or press p if price'
+    direction: 'Please choose sort direction(desc|asc):'
+    direction_letter: 'Press d if desc or press a if asc:'
+  statistic_fields:
+    total_quantity: 'Total quantity'
+    requests_quantity: 'Requests quantity'
+  result: 'Result'
+  statistic: 'Statistic'
+  start_message: 'Please select search rules.'
