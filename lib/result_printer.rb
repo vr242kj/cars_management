@@ -11,7 +11,9 @@ class ResultPrinter
       end
       rows << :separator
     end
-    puts Terminal::Table.new(title: I18n.t(:result), rows: rows)
+    table = Terminal::Table.new(title: I18n.t(:result), rows: rows)
+    table.style = {:border_bottom => false }
+    puts table
 end
 
   def print_statics (print_total_statistics)

@@ -6,7 +6,7 @@ require_relative 'lib/statistics'
 require 'i18n'
 
 puts "Enter language (en|ua)"
-lang_input = gets.chomp
+lang_input = gets.chomp.downcase
 lang_input = 'ua' if lang_input != 'en' || lang_input != 'ua'
 
 I18n.load_path << Dir[File.expand_path("config/locales") + "/#{lang_input}.yml"]
