@@ -23,8 +23,6 @@ read_searches = database.read(file_searches, true)
 search_by_rules = Rules.new(cars)
 printer = ResultPrinter.new
 
-puts I18n.t(:start_message)
-
 search_by_rules.ask_rules unless search_by_rules.finished?
 
 match_cars = search_by_rules.match_cars

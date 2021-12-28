@@ -12,6 +12,8 @@ class Rules
   end
 
   def ask_rules
+    puts I18n.t(:start_message)
+
     SEARCH_RULES.each do |rule|
       puts I18n.t("search_fields.#{rule}")
 
