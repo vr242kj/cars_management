@@ -23,15 +23,16 @@ read_searches = database.read(file_searches, true)
 
 search_by_rules = Rules.new(cars)
 printer = ResultPrinter.new
+statistics = Statistics.new(read_searches || [])
 
 search_by_rules.ask_rules unless search_by_rules.finished?
 
 match_cars = search_by_rules.match_cars
 
-statistics = Statistics.new(match_cars)
-
+statistics.make_total_quantity(match_cars)
 requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
-total_statistic = statistics.total_statistic(requests_values, read_searches)
+total_statistic = statistics.total_statistic(requests_values)
+
 database.write(file_searches, total_statistic)
 
 puts I18n.t('sort_fields.option')

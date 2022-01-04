@@ -3,7 +3,7 @@
 require 'yaml'
 
 class Database
-  PATH = File.expand_path('../../db', __FILE__)
+  PATH = File.expand_path('../db', __dir__)
 
   def read(file_name, exist = false)
     create_if_not_exists(file_name, exist)
@@ -20,7 +20,7 @@ class Database
   def create_if_not_exists(file_name, exist)
     if exist && !File.exist?("#{PATH}/#{file_name}.yml")
 
-       File.new("#{PATH}/#{file_name}.yml", 'w')
+      File.new("#{PATH}/#{file_name}.yml", 'w')
     end
   end
 end
