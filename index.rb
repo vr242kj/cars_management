@@ -5,6 +5,7 @@ require_relative 'lib/rules'
 require_relative 'lib/result_printer'
 require_relative 'lib/statistics'
 require 'i18n'
+require 'lefthook'
 
 puts 'Enter language (en|ua)'
 lang_input = gets.chomp.downcase

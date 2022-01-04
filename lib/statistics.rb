@@ -7,7 +7,7 @@ class Statistics
   end
 
   def valuable_request_values(user_answers)
-    user_answers.each_with_object({}) do |requests, (key, value)|
+    user_answers.inject({}) do |requests, (key, value)|
       requests[key] = value if value != '' && value != 0
       requests
     end
