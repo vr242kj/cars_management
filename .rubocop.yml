@@ -47,11 +47,4 @@ Layout/ClassStructure:
       - public_methods
       - protected_methods
       - private_methods
-# Metrics ----------------------------------------------------------------------
-
-Metrics/AbcSize:
-  Max: 40
-
-Metrics/MethodLength:
-  Max: 20
 
