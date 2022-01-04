@@ -7,7 +7,7 @@ class Statistics
   end
 
   def valuable_request_values(user_answers)
-    user_answers.inject({}) do |requests, (key, value)|
+    user_answers.each_with_object({}) do |requests, (key, value)|
       requests[key] = value if value != '' && value != 0
       requests
     end
@@ -15,7 +15,7 @@ class Statistics
 
   def total_statistic(request, searches)
     if searches == false
-      @search_statistics.push({ search: request, statistics: @statistic  })
+      @search_statistics.push({ search: request, statistics: @statistic })
     else
       searches.each do |record|
         record[:statistics][:requests_quantity] += 1 if record[:search] == request
@@ -34,4 +34,3 @@ class Statistics
     car[:statistics]
   end
 end
-
