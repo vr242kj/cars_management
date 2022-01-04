@@ -15,7 +15,7 @@ class Statistics
 
   def total_statistic(request, searches)
     if searches == false
-      @search_statistics.push({ search: request, statistics: @statistic  })
+      @search_statistics.push({ search: request, statistics: @statistic })
     else
       searches.each do |record|
         record[:statistics][:requests_quantity] += 1 if record[:search] == request

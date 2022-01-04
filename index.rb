@@ -1,15 +1,16 @@
 # frozen_string_literal: true
+
 require_relative 'lib/database'
 require_relative 'lib/rules'
 require_relative 'lib/result_printer'
 require_relative 'lib/statistics'
 require 'i18n'
 
-puts "Enter language (en|ua)"
+puts 'Enter language (en|ua)'
 lang_input = gets.chomp.downcase
 lang_input = 'ua' if lang_input != 'en' && lang_input != 'ua'
 
-I18n.load_path << Dir[File.expand_path("config/locales") + "/#{lang_input}.yml"]
+I18n.load_path << Dir[File.expand_path('config/locales') + "/#{lang_input}.yml"]
 
 database = Database.new
 
