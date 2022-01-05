@@ -33,7 +33,7 @@ Database: **cars.yml**(https://gist.github.com/Svatok/bd80ffb7d34969262e5a65579e
 2. Clone respected git repository.
 > git clone https://github.com/vr242kj/cars_management.git
 3. Change the working directory
-> cd cars_manager
+> cd cars_management
 4. For install dependencies run in terminal
 > bundle install
 5. Run index.rb file.

@@ -8,8 +8,6 @@ class Database
   def read(file_name, exist: false)
     create_if_not_exists(file_name, exist)
 
-    return unless File.exist?("#{PATH}/#{file_name}.yml")
-
     YAML.load_file("#{PATH}/#{file_name}.yml") || []
   end
 
@@ -18,7 +16,7 @@ class Database
   end
 
   def create_if_not_exists(file_name, exist)
-    return unless exist && !File.exist?("#{PATH}/#{file_name}.yml")
+    return unless exist || !File.exist?("#{PATH}/#{file_name}.yml")
 
     File.new("#{PATH}/#{file_name}.yml", 'w')
   end
