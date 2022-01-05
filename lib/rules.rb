@@ -68,7 +68,7 @@ class Rules
   end
 
   def match_model(car)
-     user_answers['model'].empty? || car['model'].downcase == user_answers['model']
+    user_answers['model'].empty? || car['model'].downcase == user_answers['model']
   end
 
   def match_year(car)

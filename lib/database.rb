@@ -10,6 +10,8 @@ class Database
 
     return unless File.exist?("#{PATH}/#{file_name}.yml")
 
+    return [] unless YAML.load_file("#{PATH}/#{file_name}.yml")
+
     YAML.load_file("#{PATH}/#{file_name}.yml")
   end
 

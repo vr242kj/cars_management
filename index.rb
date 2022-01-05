@@ -4,13 +4,11 @@ require_relative 'lib/database'
 require_relative 'lib/rules'
 require_relative 'lib/result_printer'
 require_relative 'lib/statistics'
+require_relative 'lib/language'
 require 'i18n'
 
-puts 'Enter language (en|ua)'
-lang_input = gets.chomp.downcase
-lang_input = 'ua' if lang_input != 'en' && lang_input != 'ua'
-
-I18n.load_path << Dir[File.expand_path('config/locales') + "/#{lang_input}.yml"]
+language = Language.new
+language.ask_language
 
 database = Database.new
 
@@ -23,7 +21,7 @@ read_searches = database.read(file_searches, true)
 
 search_by_rules = Rules.new(cars)
 printer = ResultPrinter.new
-statistics = Statistics.new(read_searches || [])
+statistics = Statistics.new(read_searches)
 
 search_by_rules.ask_rules unless search_by_rules.finished?
 

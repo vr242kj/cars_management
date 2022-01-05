@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Statistics
+  attr_reader :searches
+
   def initialize(searches)
     @searches = searches
     @statistic = { total_quantity: 0, requests_quantity: 1 }
@@ -19,7 +21,7 @@ class Statistics
   end
 
   def total_statistic(request)
-    @searches.each do |record|
+    searches.each do |record|
       record[:statistics][:requests_quantity] += 1 if record[:search] == request
       @search_statistics.push(record)
     end
