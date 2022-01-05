@@ -10,7 +10,7 @@ class Database
 
     return unless File.exist?("#{PATH}/#{file_name}.yml")
 
-    YAML.load_file("#{PATH}/#{file_name}.yml")
+    YAML.load_file("#{PATH}/#{file_name}.yml") || []
   end
 
   def write(file_name, data)
