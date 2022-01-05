@@ -1,0 +1,28 @@
+en:
+  car_fields:
+    id: 'Ідентифікатор'
+    make: 'Марка'
+    model: 'Модель'
+    year: 'Рік'
+    odometer: 'Пробіг'
+    price: 'Ціна'
+    description: 'Опис'
+    date_added: 'Дата додавання'
+  search_fields:
+    make: 'Введіть марку'
+    model: 'Введіть модель'
+    year_from: 'Введіть рік від якого шукати'
+    year_to: 'Введіть рік до якого шукати'
+    price_from: 'Введіть ціну від якої шукати'
+    price_to: 'Введіть ціну до якої шукати'
+  sort_fields:
+    option: 'По якому полю сортувати (date_added|price)'
+    option_letter: 'Введіть d якщо date_added або введіть p якщо price'
+    direction: 'Оберіть напрямок сортування (desc|asc)'
+    direction_letter: 'Введіть d якщо desc або введіть a якщо asc:'
+  statistic_fields:
+    total_quantity: 'Загальна кількість'
+    requests_quantity: 'Кількість запитів'
+  result: 'Результат'
+  statistic: 'Статистика'
+  start_message: 'Виберіть правила пошуку'

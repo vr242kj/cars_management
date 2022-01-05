@@ -12,8 +12,10 @@ class Rules
   end
 
   def ask_rules
+    puts I18n.t(:start_message)
+
     SEARCH_RULES.each do |rule|
-      puts "Please choose #{rule}:"
+      puts I18n.t("search_fields.#{rule}")
 
       user_input = gets.chomp.downcase
 
@@ -66,7 +68,7 @@ class Rules
   end
 
   def match_model(car)
-     user_answers['model'].empty? || car['model'].downcase == user_answers['model']
+    user_answers['model'].empty? || car['model'].downcase == user_answers['model']
   end
 
   def match_year(car)
