@@ -17,7 +17,7 @@ file_searches = 'searches'
 
 cars = database.read(file_cars)
 
-read_searches = database.read(file_searches, true)
+read_searches = database.read(file_searches, create: true)
 
 search_by_rules = Rules.new(cars)
 printer = ResultPrinter.new

@@ -2,7 +2,7 @@
 
 require 'i18n'
 
-class Language 
+class Language
   LANGUAGES = %w[ua en].freeze
 
   def ask_language
