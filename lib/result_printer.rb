@@ -27,4 +27,18 @@ class ResultPrinter
 
     puts table
   end
+
+  def show_all_cars(cars)
+    rows = []
+
+    cars.each do |car|
+      car.each do |k, v|
+        rows << [I18n.t("car_fields.#{k}").capitalize, v]
+      end
+      rows << :separator
+    end
+    table = Terminal::Table.new(title: I18n.t(:result).colorize(:blue), rows: rows)
+    table.style = { border_bottom: false }
+    puts table
+  end
 end

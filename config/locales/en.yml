@@ -26,3 +26,11 @@ en:
   result: 'Result'
   statistic: 'Statistic'
   start_message: 'Please select search rules.'
+  help: " This app was created to help you find a car.\n
+        To use the application correctly, you need to enter one digit from the set.\n
+        If you enter incorrectly, the menu will reappear.\n
+        Options:\n
+        1.Find car - will list all found cars that the user specified in the search parameters.\n
+        2.Remove all cars - displays all cars in the database.\n
+        3.Help - will write an explanation of how to use the application.\n
+        4.Exit - terminates the application."
