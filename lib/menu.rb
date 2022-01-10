@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'database'
-require_relative 'rules'
-require_relative 'result_printer'
-require_relative 'statistics'
-require_relative 'language'
-require_relative 'search_executor'
-require 'i18n'
+require_relative 'dependencies'
 
 class Menu
   MENU = %i[execute_search show_all_cars help exit].freeze
@@ -47,9 +41,7 @@ class Menu
   end
 
   def correct_input(option_number)
-    return false if option_number < 1 || option_number > MENU.size
-
-    true
+    (1..MENU.size).cover?(option_number)
   end
 
   def execute_search

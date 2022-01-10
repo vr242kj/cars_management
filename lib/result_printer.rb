@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'terminal-table'
-require 'colorize'
+require_relative 'dependencies'
 
 class ResultPrinter
   def print_result(results)

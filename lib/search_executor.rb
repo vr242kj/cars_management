@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'database'
-require_relative 'rules'
-require_relative 'result_printer'
-require_relative 'statistics'
-require_relative 'language'
-require 'i18n'
+require_relative 'dependencies'
 
 class SearchExecutor
   FILE_CARS = 'cars'
@@ -23,28 +18,25 @@ class SearchExecutor
 
   def call
     statistics = Statistics.new(read_searches)
-    # search_by_rules.ask_rules
-    # match_cars = search_by_rules.match_cars
-    # statistics.make_total_quantity(match_cars)
 
-    sort_direction = ask_rules_option_direction(statistics)
+    match_cars = ask_rules(statistics)
+    sort_option = ask_option(search_by_rules, match_cars)
+    sort_direction = ask_direction(search_by_rules, sort_option)
 
     requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
     update_statistics(statistics, requests_values)
 
     print_statistic(statistics, requests_values)
-    print_result(sort_direction)
+    printer.print_result(sort_direction)
   end
 
   private
 
-  def ask_rules_option_direction(statistics)
+  def ask_rules(statistics)
     search_by_rules.ask_rules
     match_cars = search_by_rules.match_cars
     statistics.make_total_quantity(match_cars)
-
-    sort_option = ask_option(search_by_rules, match_cars)
-    ask_direction(search_by_rules, sort_option)
+    match_cars
   end
 
   def update_statistics(statistics, requests_values)
@@ -67,9 +59,5 @@ class SearchExecutor
   def print_statistic(statistics, requests_values)
     print_total_statistics = statistics.find_statistic(requests_values)
     printer.print_statics(print_total_statistics)
-  end
-
-  def print_result(sort_direction)
-    printer.print_result(sort_direction)
   end
 end

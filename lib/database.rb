@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'yaml'
+require_relative 'dependencies'
 
 class Database
   PATH = File.expand_path('../db', __dir__)
