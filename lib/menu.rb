@@ -42,12 +42,12 @@ class Menu
   end
 
   def correct_input(option_number)
-    puts I18n.t('unexpected_choice_error') unless MENU.map { |x| MENU.index(x) + 1 == option_number }.any?
+    puts I18n.t('unexpected_choice_error') if option_number < 1 || option_number > MENU.size
     puts('')
   end
 
   def search_a_car
-    @executor.search_a_car
+    @executor.call
   end
 
   def show_all_cars

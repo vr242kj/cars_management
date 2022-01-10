@@ -20,7 +20,7 @@ class Executor
     @printer = ResultPrinter.new
   end
 
-  def search_a_car
+  def call
     search_by_rules = Rules.new(cars)
     statistics = Statistics.new(read_searches)
     search_by_rules.ask_rules unless search_by_rules.finished?
@@ -35,6 +35,8 @@ class Executor
     print_total_statistics = statistics.find_statistic(requests_values)
     print_serched_car(print_total_statistics, sort_direction)
   end
+
+  private
 
   def ask_option(search_by_rules, match_cars)
     puts I18n.t('sort_fields.option')
