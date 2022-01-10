@@ -9,12 +9,14 @@ require_relative 'executor'
 require 'i18n'
 
 class Menu
-  MENU = %i[search_a_car show_all_cars help exit].freeze
+  MENU = %i[require_car show_all_cars help exit].freeze
   FILE_CARS = 'cars'
+
+  attr_reader :database, :cars, :printer, :executor
 
   def initialize
     @database = Database.new
-    @cars = @database.read(FILE_CARS)
+    @cars = database.read(FILE_CARS)
     @printer = ResultPrinter.new
     @executor = Executor.new
   end
@@ -31,6 +33,8 @@ class Menu
     end
   end
 
+  private
+
   def select_option
     puts I18n.t('start_message')
 
@@ -46,13 +50,13 @@ class Menu
     puts('')
   end
 
-  def search_a_car
-    @executor.call
+  def require_car
+    executor.call
   end
 
   def show_all_cars
     printer = ResultPrinter.new
-    printer.print_all_cars(@cars)
+    printer.print_all_cars(cars)
     puts('')
   end
 

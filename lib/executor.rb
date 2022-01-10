@@ -11,24 +11,27 @@ class Executor
   FILE_CARS = 'cars'
   FILE_SEARCHES = 'searches'
 
-  attr_reader :database, :cars, :read_searches, :printer
+  attr_reader :database, :cars, :read_searches, :printer, :search_by_rules
 
   def initialize
     @database = Database.new
     @cars = database.read(FILE_CARS)
     @read_searches = database.read(FILE_SEARCHES, create: true)
     @printer = ResultPrinter.new
+    @search_by_rules = Rules.new(cars)
   end
 
   def call
-    search_by_rules = Rules.new(cars)
     statistics = Statistics.new(read_searches)
     search_by_rules.ask_rules unless search_by_rules.finished?
     match_cars = search_by_rules.match_cars
     statistics.make_total_quantity(match_cars)
+    
     requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
     total_statistic = statistics.total_statistic(requests_values)
+
     database.write(FILE_SEARCHES, total_statistic)
+
     sort_option = ask_option(search_by_rules, match_cars)
     sort_direction = ask_direction(search_by_rules, sort_option)
 
