@@ -28,7 +28,7 @@ class ResultPrinter
     puts table
   end
 
-  def show_all_cars(cars)
+  def print_all_cars(cars)
     rows = []
 
     cars.each do |car|
