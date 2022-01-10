@@ -5,11 +5,11 @@ require_relative 'rules'
 require_relative 'result_printer'
 require_relative 'statistics'
 require_relative 'language'
-require_relative 'executor'
+require_relative 'search_executor'
 require 'i18n'
 
 class Menu
-  MENU = %i[require_car show_all_cars help exit].freeze
+  MENU = %i[execute_search show_all_cars help exit].freeze
   FILE_CARS = 'cars'
 
   attr_reader :database, :cars, :printer, :executor
@@ -18,7 +18,7 @@ class Menu
     @database = Database.new
     @cars = database.read(FILE_CARS)
     @printer = ResultPrinter.new
-    @executor = Executor.new
+    @executor = SearchExecutor.new
   end
 
   def show_menu
@@ -50,7 +50,7 @@ class Menu
     puts('')
   end
 
-  def require_car
+  def execute_search
     executor.call
   end
 

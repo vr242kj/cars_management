@@ -37,7 +37,7 @@ en:
         4.Exit - terminates the application."
   unexpected_choice_error: "You have entered an incorrect value. \nTry again."
   menu_choices:
-    search_a_car: 'Find car'
+    execute_search : 'Find car'
     show_all_cars: 'Show all cars'
     help: 'Help'
     exit: 'Exit'

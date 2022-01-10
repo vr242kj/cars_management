@@ -59,10 +59,6 @@ class Rules
     end
   end
 
-  def finished?
-    @current_question >= SEARCH_RULES.size
-  end
-
   private
 
   def match_make(car)

@@ -7,7 +7,7 @@ require_relative 'statistics'
 require_relative 'language'
 require 'i18n'
 
-class Executor
+class SearchExecutor
   FILE_CARS = 'cars'
   FILE_SEARCHES = 'searches'
 
@@ -18,12 +18,12 @@ class Executor
     @cars = database.read(FILE_CARS)
     @read_searches = database.read(FILE_SEARCHES, create: true)
     @printer = ResultPrinter.new
-    @search_by_rules = Rules.new(cars)
   end
 
   def call
+    @search_by_rules = Rules.new(cars)
     statistics = Statistics.new(read_searches)
-    search_by_rules.ask_rules unless search_by_rules.finished?
+    search_by_rules.ask_rules
     match_cars = search_by_rules.match_cars
     statistics.make_total_quantity(match_cars)
     requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
