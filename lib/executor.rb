@@ -26,7 +26,6 @@ class Executor
     search_by_rules.ask_rules unless search_by_rules.finished?
     match_cars = search_by_rules.match_cars
     statistics.make_total_quantity(match_cars)
-    
     requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
     total_statistic = statistics.total_statistic(requests_values)
 
