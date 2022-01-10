@@ -12,13 +12,13 @@ class Menu
   MENU = %i[execute_search show_all_cars help exit].freeze
   FILE_CARS = 'cars'
 
-  attr_reader :database, :cars, :printer, :executor
+  attr_reader :database, :cars, :printer, :search_executor
 
   def initialize
     @database = Database.new
     @cars = database.read(FILE_CARS)
     @printer = ResultPrinter.new
-    @executor = SearchExecutor.new
+    @search_executor = SearchExecutor.new
   end
 
   def show_menu
@@ -51,7 +51,7 @@ class Menu
   end
 
   def execute_search
-    executor.call
+    search_executor.call
   end
 
   def show_all_cars
