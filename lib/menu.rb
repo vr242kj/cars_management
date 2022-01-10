@@ -25,11 +25,8 @@ class Menu
     puts I18n.t('greeting')
     loop do
       option_number = select_option
-      correct_input(option_number)
 
-      MENU.each_with_index  do |menu, index|
-        send(menu) if index == option_number - 1
-      end
+      send(MENU[option_number - 1]) if correct_input(option_number)
     end
   end
 
@@ -46,8 +43,13 @@ class Menu
   end
 
   def correct_input(option_number)
-    puts I18n.t('unexpected_choice_error') if option_number < 1 || option_number > MENU.size
-    puts('')
+    if option_number < 1 || option_number > MENU.size
+      puts I18n.t('unexpected_choice_error')
+      puts('')
+      return false
+    else
+      return true
+    end
   end
 
   def execute_search
@@ -55,7 +57,6 @@ class Menu
   end
 
   def show_all_cars
-    printer = ResultPrinter.new
     printer.print_all_cars(cars)
     puts('')
   end

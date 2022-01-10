@@ -18,27 +18,33 @@ class SearchExecutor
     @cars = database.read(FILE_CARS)
     @read_searches = database.read(FILE_SEARCHES, create: true)
     @printer = ResultPrinter.new
+    @search_by_rules = Rules.new(cars)
   end
 
   def call
-    @search_by_rules = Rules.new(cars)
     statistics = Statistics.new(read_searches)
     search_by_rules.ask_rules
     match_cars = search_by_rules.match_cars
     statistics.make_total_quantity(match_cars)
-    requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
-    total_statistic = statistics.total_statistic(requests_values)
 
-    database.write(FILE_SEARCHES, total_statistic)
+    requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
+    update_statistics(requests_values)
 
     sort_option = ask_option(search_by_rules, match_cars)
     sort_direction = ask_direction(search_by_rules, sort_option)
 
     print_total_statistics = statistics.find_statistic(requests_values)
-    print_serched_car(print_total_statistics, sort_direction)
+
+    print_statistic(print_total_statistics)
+    print_result(sort_direction)
   end
 
   private
+
+  def update_statistics(requests_values)
+    total_statistic = statistics.total_statistic(requests_values)
+    database.write(FILE_SEARCHES, total_statistic)
+  end
 
   def ask_option(search_by_rules, match_cars)
     puts I18n.t('sort_fields.option')
@@ -52,8 +58,11 @@ class SearchExecutor
     search_by_rules.sort_direction(sort_option)
   end
 
-  def print_serched_car(print_total_statistics, sort_direction)
+  def print_statistic(print_total_statistics)
     printer.print_statics(print_total_statistics)
+  end
+
+  def print_result(sort_direction)
     printer.print_result(sort_direction)
   end
 end
