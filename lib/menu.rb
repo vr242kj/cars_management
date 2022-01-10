@@ -22,11 +22,15 @@ class Menu
   end
 
   def show_menu
-    puts I18n.t('greeting')
     loop do
       option_number = select_option
-
-      send(MENU[option_number - 1]) if correct_input(option_number)
+      option_number = Integer(option_number, exception: false).to_i
+      if correct_input(option_number)
+        send(MENU[option_number - 1])
+      else
+        puts I18n.t('unexpected_choice_error')
+        puts('')
+      end
     end
   end
 
@@ -39,17 +43,13 @@ class Menu
       puts "#{index + 1} - " + I18n.t("menu_choices.#{menu}")
     end
 
-    gets.chomp.to_i
+    gets.chomp
   end
 
   def correct_input(option_number)
-    if option_number < 1 || option_number > MENU.size
-      puts I18n.t('unexpected_choice_error')
-      puts('')
-      return false
-    else
-      return true
-    end
+    return false if option_number < 1 || option_number > MENU.size
+
+    true
   end
 
   def execute_search

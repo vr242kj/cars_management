@@ -23,25 +23,31 @@ class SearchExecutor
 
   def call
     statistics = Statistics.new(read_searches)
-    search_by_rules.ask_rules
-    match_cars = search_by_rules.match_cars
-    statistics.make_total_quantity(match_cars)
+    # search_by_rules.ask_rules
+    # match_cars = search_by_rules.match_cars
+    # statistics.make_total_quantity(match_cars)
+
+    sort_direction = ask_rules_option_direction(statistics)
 
     requests_values = statistics.valuable_request_values(search_by_rules.user_answers)
-    update_statistics(requests_values)
+    update_statistics(statistics, requests_values)
 
-    sort_option = ask_option(search_by_rules, match_cars)
-    sort_direction = ask_direction(search_by_rules, sort_option)
-
-    print_total_statistics = statistics.find_statistic(requests_values)
-
-    print_statistic(print_total_statistics)
+    print_statistic(statistics, requests_values)
     print_result(sort_direction)
   end
 
   private
 
-  def update_statistics(requests_values)
+  def ask_rules_option_direction(statistics)
+    search_by_rules.ask_rules
+    match_cars = search_by_rules.match_cars
+    statistics.make_total_quantity(match_cars)
+
+    sort_option = ask_option(search_by_rules, match_cars)
+    ask_direction(search_by_rules, sort_option)
+  end
+
+  def update_statistics(statistics, requests_values)
     total_statistic = statistics.total_statistic(requests_values)
     database.write(FILE_SEARCHES, total_statistic)
   end
@@ -58,7 +64,8 @@ class SearchExecutor
     search_by_rules.sort_direction(sort_option)
   end
 
-  def print_statistic(print_total_statistics)
+  def print_statistic(statistics, requests_values)
+    print_total_statistics = statistics.find_statistic(requests_values)
     printer.print_statics(print_total_statistics)
   end
 
