@@ -25,4 +25,19 @@ en:
     requests_quantity: 'Requests quantity'
   result: 'Result'
   statistic: 'Statistic'
-  start_message: 'Please select search rules.'
+  greeting: 'Welcome'
+  start_message: 'Select the option (write the number):'
+  help: " This app was created to help you find a car.\n
+        To use the application correctly, you need to enter one digit from the set.\n
+        If you enter incorrectly, the menu will reappear.\n
+        Options:\n
+        1.Find car - will list all found cars that the user specified in the search parameters.\n
+        2.Show all cars - displays all cars in the database.\n
+        3.Help - will write an explanation of how to use the application.\n
+        4.Exit - terminates the application."
+  unexpected_choice_error: "You have entered an incorrect value. \nTry again."
+  menu_choices:
+    execute_search : 'Find car'
+    show_all_cars: 'Show all cars'
+    help: 'Help'
+    exit: 'Exit'

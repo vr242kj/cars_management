@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'terminal-table'
-require 'colorize'
+require_relative 'dependencies'
 
 class ResultPrinter
   def print_result(results)
@@ -25,6 +24,20 @@ class ResultPrinter
       t << [I18n.t('statistic_fields.requests_quantity'), print_total_statistics[:requests_quantity]]
     end
 
+    puts table
+  end
+
+  def print_all_cars(cars)
+    rows = []
+
+    cars.each do |car|
+      car.each do |k, v|
+        rows << [I18n.t("car_fields.#{k}").capitalize, v]
+      end
+      rows << :separator
+    end
+    table = Terminal::Table.new(title: I18n.t(:result).colorize(:blue), rows: rows)
+    table.style = { border_bottom: false }
     puts table
   end
 end

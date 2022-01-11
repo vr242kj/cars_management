@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'i18n'
+require_relative 'dependencies'
 
 class Language
   LANGUAGES = %w[ua en].freeze
