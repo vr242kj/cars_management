@@ -8,5 +8,6 @@
 /tmp/
 .idea/
 db/searches.yml
+db/users.yml
 .ruby-gemset/
 
