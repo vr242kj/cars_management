@@ -9,57 +9,65 @@ class User
 
   def initialize
     @database = Database.new
-    @user = { Email: '', Password: '' }
+    @user = { email: '', password: '' }
   end
 
   def sing_up
     users = database.read(FILE_USERS)
-    menu2 = Menu.new
-    puts 'Enter email'
-    email = gets.chomp
-    if valid_email(email) && !email_exists?(users, email)
-      user[:Email] = email
-    else
-      puts 'Error message'
-      menu2.show_menu
-    end
 
-    puts 'Enter password'
-    password = gets.chomp
-    if valid_password(password)
-      user[:Password] = password
-    else
-      puts 'Error message'
-      menu2.show_menu
-    end
-    # pass = BCrypt::Password.create(password)
-    # user[:Password] = pass
+    handle_email(users)
+    handle_password
+
     update_users_database(users, user)
     puts ''
-    puts "Hello, #{user[:Email]}"
+    puts I18n.t('greeting') + ", #{user[:email]}"
   end
 
   def log_out
-    @user = { Email: '', Password: '' }
-    puts 'See you later'
-    menu3 = Menu.new
-    menu3.show_menu
+    puts I18n.t('goodbye')
+    menu = Menu.new
+    menu.show_menu
   end
 
   def log_in
-    menu = Menu.new
-
-    puts 'Enter email'
+    puts I18n.t('email')
     email = gets.chomp
 
-    puts 'Enter password'
+    puts I18n.t('password')
     password = gets.chomp
     puts ''
 
-    if user_is_exist?(email, password)
-      puts "Hello, #{email}"
+    user_is_exist(email, password)
+  end
+
+  private
+
+  def handle_email(users)
+    menu = Menu.new
+
+    puts I18n.t('email')
+    email = gets.chomp
+
+    if valid_email(email) && !email_exists?(users, email)
+      user[:email] = email
     else
-      puts "User doesn't exist"
+      puts I18n.t('incorrect_params')
+      puts I18n.t('email_rules')
+      menu.show_menu
+    end
+  end
+
+  def handle_password
+    menu = Menu.new
+
+    puts I18n.t('password')
+    password = gets.chomp
+
+    if valid_password(password)
+      user[:password] = BCrypt::Password.create(password)
+    else
+      puts I18n.t('incorrect_params')
+      puts I18n.t('password_rules')
       menu.show_menu
     end
   end
@@ -69,7 +77,7 @@ class User
   end
 
   def email_exists?(users, entered_email)
-    users.any? { |h| h.any?([:Email, entered_email]) }
+    users.any? { |h| h.any?([:email, entered_email]) }
   end
 
   def valid_password(entered_password)
@@ -81,9 +89,16 @@ class User
     database.write(FILE_USERS, users)
   end
 
-  def user_is_exist?(email, password)
+  def user_is_exist(email, password)
+    menu = Menu.new
     users = database.read(FILE_USERS)
-
-    users.any? { |h| h.any?([:Email, email]) && h.any?([:Password, password]) }
+    user = users.detect { |h| h[:email] == email && h[:password] == password }
+    puts user
+    if user
+      puts I18n.t('greeting') + ", #{user[:email]}"
+    else
+      puts I18n.t('user_dont_exist')
+      menu.show_menu
+    end
   end
 end

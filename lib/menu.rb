@@ -3,12 +3,12 @@
 require_relative 'dependencies'
 
 class Menu
-  @@men = %i[log_in sing_up execute_search show_all_cars help exit]
   FILE_CARS = 'cars'
 
   attr_reader :database, :cars, :printer, :search_executor, :user
 
   def initialize
+    @menu = %i[log_in sing_up execute_search show_all_cars help exit]
     @database = Database.new
     @cars = database.read(FILE_CARS)
     @printer = ResultPrinter.new
@@ -21,7 +21,7 @@ class Menu
       option_number = select_option
       option_number = Integer(option_number, exception: false).to_i
       if correct_input(option_number)
-        send(@@men[option_number - 1])
+        send(@menu[option_number - 1])
       else
         puts I18n.t('unexpected_choice_error')
         puts('')
@@ -35,7 +35,7 @@ class Menu
     puts ''
     puts I18n.t('start_message')
 
-    @@men.each_with_index do |menu, index|
+    @menu.each_with_index do |menu, index|
       puts "#{index + 1} - " + I18n.t("menu_choices.#{menu}")
     end
 
@@ -43,7 +43,7 @@ class Menu
   end
 
   def correct_input(option_number)
-    (1..@@men.size).cover?(option_number)
+    (1..@menu.size).cover?(option_number)
   end
 
   def execute_search
@@ -62,16 +62,20 @@ class Menu
 
   def log_in
     user.log_in
-    @@men.push('log_out')
+    return if @menu.include?(:log_out)
+
+    @menu.push(:log_out)
   end
 
   def sing_up
     user.sing_up
-    @@men.push('log_out')
+    return if @menu.include?(:log_out)
+
+    @menu.push(:log_out)
   end
 
   def log_out
-    @@men.pop
+    @menu.pop
     user.log_out
   end
 end
