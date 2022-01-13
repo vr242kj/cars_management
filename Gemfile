@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
+gem 'bcrypt'
 gem 'bundler-audit'
 gem 'bundler-leak', '~> 0.2.0'
 gem 'colorize', '~> 0.8.1'
