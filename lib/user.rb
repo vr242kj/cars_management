@@ -13,7 +13,7 @@ class User
   end
 
   def sing_up
-    users = database.read(FILE_USERS)
+    users = database.read(FILE_USERS, create: true)
 
     handle_email(users)
     handle_password
@@ -91,9 +91,8 @@ class User
 
   def user_is_exist(email, password)
     menu = Menu.new
-    users = database.read(FILE_USERS)
+    users = database.read(FILE_USERS, create: true)
     user = users.detect { |h| h[:email] == email && h[:password] == password }
-    puts user
     if user
       puts I18n.t('greeting') + ", #{user[:email]}"
     else
