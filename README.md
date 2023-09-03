@@ -1,5 +1,5 @@
 # Cars search
-Сonsole application for displaying cars cars from the database with the specified parameters
+Сonsole application for displaying cars from the database with the specified parameters
 ## Task
 * The app must have the ability to load all data from the db (db.yml).
 * The app must have the ability to search by rules:
